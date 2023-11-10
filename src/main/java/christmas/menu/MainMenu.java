@@ -1,4 +1,4 @@
-package christmas.Menu;
+package christmas.menu;
 
 public enum MainMenu implements Menu {
     TBORNSTAEK("티본스테이크","55,000",55000),

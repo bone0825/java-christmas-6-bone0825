@@ -1,4 +1,4 @@
-package christmas.Menu;
+package christmas.menu;
 
 public enum Dessert implements Menu {
 
