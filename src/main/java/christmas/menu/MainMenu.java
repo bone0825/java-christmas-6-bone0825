@@ -18,4 +18,18 @@ public enum MainMenu implements Menu {
         this.menuValue = menuValue;
     }
 
+    @Override
+    public String getMenuName() {
+        return null;
+    }
+
+    @Override
+    public String getMenuPrice() {
+        return null;
+    }
+
+    @Override
+    public int getMenuValue() {
+        return menuValue;
+    }
 }

@@ -18,4 +18,18 @@ public enum Appetizer implements Menu{
         this.menuValue = menuValue;
     }
 
+    @Override
+    public String getMenuName() {
+        return menuName;
+    }
+
+    @Override
+    public String getMenuPrice() {
+        return menuPrice;
+    }
+
+    @Override
+    public int getMenuValue() {
+        return menuValue;
+    }
 }

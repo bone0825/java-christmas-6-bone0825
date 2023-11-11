@@ -2,6 +2,8 @@ package christmas.view;
 
 import java.text.DecimalFormat;
 
+import static christmas.view.OutputMessage.*;
+
 public class OutputView {
     private static final String OUTPUT_PRICE_FORMAT = "#,###.#";
 
