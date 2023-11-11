@@ -35,6 +35,8 @@ public class InputValidator {
         if(!containsMenuItem(s, MainMenu.values())) throw new NoMenuException();
         if(!containsMenuItem(s, Appetizer.values())) throw new NoMenuException();
         if(!containsMenuItem(s, Dessert.values())) throw new NoMenuException();
+        if(!containsMenuItem(s, Drinks.values())) throw new NoMenuException();
+
     }
 
     private static boolean containsMenuItem(String input, Menu[] menuItems){

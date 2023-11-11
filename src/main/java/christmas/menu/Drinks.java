@@ -1,14 +1,15 @@
 package christmas.menu;
 
-public enum Dessert implements Menu {
+public enum Drinks implements Menu {
+    ZEROCOKE("제로콜라", 3000),
+    REDWINE("레드와인",60000),
+    CHAMPAGNE("샴페인",25000);
 
-    CHOCOCAKE("초코케이크",15000),
-    ICECREAM("아이스크림",5000);
 
     private String menuName;
     private int menuPrice;
 
-    private Dessert(String menuName, int menuPrice) {
+    private Drinks(String menuName, int menuPrice) {
         this.menuName = menuName;
         this.menuPrice = menuPrice;
     }
@@ -23,3 +24,4 @@ public enum Dessert implements Menu {
         return menuPrice;
     }
 }
+

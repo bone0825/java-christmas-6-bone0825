@@ -2,20 +2,18 @@ package christmas.menu;
 
 public enum Appetizer implements Menu{
 
-    MUSHROOMSOUP("양송이수프","6,000",6000),
-    TAPAS("타파스","5,500",5000),
-    CAESARSALAD("시저샐러드","8,000",8000);
+    MUSHROOMSOUP("양송이수프",6000),
+    TAPAS("타파스",5000),
+    CAESARSALAD("시저샐러드",8000);
 
 
 
     private String menuName;
-    private String menuPrice;
-    private int menuValue;
+    private int menuPrice;
 
-    private Appetizer(String menuName, String menuPrice, int menuValue){
+    private Appetizer(String menuName, int menuPrice) {
         this.menuName = menuName;
         this.menuPrice = menuPrice;
-        this.menuValue = menuValue;
     }
 
     @Override
@@ -24,12 +22,7 @@ public enum Appetizer implements Menu{
     }
 
     @Override
-    public String getMenuPrice() {
+    public int getMenuPrice() {
         return menuPrice;
-    }
-
-    @Override
-    public int getMenuValue() {
-        return menuValue;
     }
 }
