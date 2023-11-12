@@ -1,6 +1,6 @@
 package christmas.utils;
 
-import christmas.exception.inputvalidator.ContainSpaceException;
+import christmas.exception.menuvalidator.EmptyOrderException;
 import christmas.exception.menuvalidator.IllegalOrderException;
 import christmas.exception.menuvalidator.MenuCountOutOfRangeException;
 import christmas.exception.menuvalidator.OnlyDrinksException;
@@ -37,9 +37,9 @@ public class MenuValidator {
         return menu.getType().equals("Drinks");
     }
 
-    public static void validateEmptyMenu(List<String> tempMenu) {
+    public static void validateEmptyMenu(List<String> tempMenu) {//입력한 메뉴 공백 확인
         for(String menu: tempMenu){
-            if (menu.isEmpty() || menu.equals(" ")) throw new IllegalOrderException();
+            if (menu.isEmpty() || menu.equals(" ")) throw new EmptyOrderException();
         }
     }
 }
