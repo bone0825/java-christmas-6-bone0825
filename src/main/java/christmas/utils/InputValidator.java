@@ -9,11 +9,12 @@ import christmas.menu.*;
 import com.sun.tools.javac.Main;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 
 public class InputValidator {
-    public static void validateAmountNotNumber(String inputValue) {
+    public static void validateAmountNotNumber(String inputValue) {//숫자 유뮤 확인
         try {
             Integer.parseInt(inputValue);
         } catch (NumberFormatException e) {
@@ -21,28 +22,40 @@ public class InputValidator {
         }
     }
 
-    public static void validateContainSpace(String inputValue){
+    public static void validateContainSpace(String inputValue){ //공백 유뮤 확인
         if(inputValue.contains(" ")) throw new ContainSpaceException();
     }
 
 
-    public static void validateMenuForm(String order) {
+    public static void validateMenuForm(String order) { //메뉴 입력 양식 확인
         if (!order.contains("-")) throw new IllegalOrderException();
         if (!order.contains(",")) throw new IllegalOrderException();
     }
 
-    public static void validateMenuInput(String s) {
-        if(!containsMenuItem(s, MainMenu.values())) throw new NoMenuException();
-        if(!containsMenuItem(s, Appetizer.values())) throw new NoMenuException();
-        if(!containsMenuItem(s, Dessert.values())) throw new NoMenuException();
-        if(!containsMenuItem(s, Drinks.values())) throw new NoMenuException();
+    public static Menu validateMenuInput(String s) {//어디에도 포함되어 있지 않으면 에러 리턴,
+        List<Menu> menus = new ArrayList<>();
+        menus.add(MainMenu);
+        Menu menu = containsMenuItem(s,MainMenu.values());
+        if (menu != null) return menu;
+
+        menu = containsMenuItem(s,Appetizer.values());
+        if (menu != null) return menu;
+
+        menu = containsMenuItem(s,Drinks.values());
+        if (menu != null) return menu;
+
+        menu = containsMenuItem(s,Dessert.values());
+        if (menu != null) return menu;
+
+        throw new NoMenuException();
 
     }
 
-    private static boolean containsMenuItem(String input, Menu[] menuItems){
+
+    private static Menu containsMenuItem(String input, Menu[] menuItems){
         for(Menu menuItem : menuItems){
-            if (menuItem.getMenuName().equals(input)){return true;}
+            if (menuItem.getMenuName().equals(input)){return menuItem;}
         }
-        return false;
+        return null;
     }
 }
