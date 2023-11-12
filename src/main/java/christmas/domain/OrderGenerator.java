@@ -1,6 +1,7 @@
 package christmas.domain;
 
 import christmas.menu.Menu;
+import christmas.utils.MenuValidator;
 import christmas.view.InputView;
 import christmas.view.OutputView;
 
@@ -28,9 +29,12 @@ public class OrderGenerator {
     }
 
     private Map<Map<Menu,Integer>, Integer> makeOrders() {
+        Map<Map<Menu,Integer>, Integer> orders;
         String menuInput = inputView.inputOrderMenu();
         try{
-            return stringToMap(menuInput);
+            orders = stringToMap(menuInput);
+            MenuValidator.validateMenuOnlyDrinks(orders);
+            return orders;
         } catch (IllegalArgumentException e){
             e.printStackTrace();
             System.out.println(e.getMessage());

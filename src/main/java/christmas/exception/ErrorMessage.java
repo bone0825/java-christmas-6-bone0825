@@ -2,6 +2,7 @@ package christmas.exception;
 
 public enum ErrorMessage {
 
+    ONLYDRINKSEXCEPTION("[ERROR] 음료만 주문할 수 없습니다."),
     OUTOFDAYEXCEPTION("[ERROR] 유효하지 않은 날짜입니다. 다시 입력해주세요. (1~31)"),
     NONNUMERICINPUT("[ERROR] 잘못된 양식입니다. 정확한 숫자를 입력해 주세요."),
     NONSPACEINPUT("[ERROR] 공백 없이 입력해 주세요"),

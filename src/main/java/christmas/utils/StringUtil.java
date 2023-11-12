@@ -15,13 +15,14 @@ public class StringUtil {
 
     public static Map<Map<Menu,Integer>, Integer> stringToMap(String inputValue) {
         List<String> tempMenu = stringToList(inputValue);
+        MenuValidator.validateEmptyMenu(tempMenu);
         return listToMap(tempMenu);
     }
 
     private static List<String> stringToList(String inputValue) {
         InputValidator.validateContainSpace(inputValue); //공백 검사
         InputValidator.validateDashSeparate(inputValue); //"-" 존재 검사
-        return Arrays.asList(inputValue.split(","));
+        return Arrays.asList(inputValue.split(",",-1));
     }
 
 
