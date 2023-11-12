@@ -1,6 +1,9 @@
 package christmas.view;
 
 public enum OutputMessage {
+
+    OUTPUT_SERVICE_HELLO("안녕하세요! 우테코 식당 12월 이벤트 플래너입니다."),
+    OUTPUT_ALL_MENULS("<<< 주문 가능한 메뉴들 >>>"),
     SERVICE_OUTPUT_PROMOTIONS_PREVIEW("%d월 %d일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!"),
     OUTPUT_ORDERED_MENU("<주문 메뉴>"),
     OUTPUT_GIVEAWAY_MENU("<증정 메뉴>"),

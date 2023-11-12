@@ -10,7 +10,6 @@ public class ContainSpaceException extends CustomException {
         super(NONSPACEINPUT.getMessage());
     }
 
-
     @Override
     public String getMessage() {
         return NONSPACEINPUT.getMessage();

@@ -1,33 +1,27 @@
 package christmas.domain;
 
-import christmas.menu.Menu;
+import static christmas.utils.StringUtil.stringToMap;
 
-import java.util.ArrayList;
-import java.util.List;
+import christmas.menu.Menu;
+import christmas.utils.StringUtil;
+import christmas.view.InputView;
+
 import java.util.Map;
 
 public class PromotionGenerator {
-    private int reserveDay; // 예약시간
-    private Map<Menu,Integer> menus; //메뉴 , 주문개수
-    private List<Map<Menu,Integer>> menuCategory; //카테고리 별 메뉴
-    private List<List<Map<Menu,Integer>>> totalMenus = new ArrayList<>(); //전체 카테고리 포함 메뉴
+
+    private int reserveDay;
+    private Map<Map<Menu,Integer>,Integer> orders; //<<카테고리,주문번호>,주문개수>
     private int totalPrice; //할인 전 총 금액
 
+    InputView inputView;
 
-
-    public PromotionGenerator(int reserveDay, Map<Menu, Integer> menus){
-        this.reserveDay=reserveDay;
-        this.menus = menus;
-        promotionGenerate();
+    public PromotionGenerator(InputView inputView, int reserveDay,Map<Map<Menu,Integer>,Integer> orders){
+        this.inputView = inputView;
+        this.reserveDay = reserveDay; //예약 날짜 생성
+        ;
+        this.orders= orders; //주문 내역 생성
     }
 
-    private void promotionGenerate() {
-        int totalPrice = getTotalPrice(menus);
 
-    }
-
-    private int getTotalPrice(Map<Menu, Integer> menus) {
-
-        return 0;
-    }
 }

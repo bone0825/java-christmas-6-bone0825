@@ -1,11 +1,6 @@
 package christmas.view;
 
 import camp.nextstep.edu.missionutils.Console;
-import christmas.menu.Menu;
-import christmas.utils.InputValidator;
-
-import java.util.List;
-import java.util.Map;
 
 import static christmas.utils.StringUtil.stringToInt;
 
@@ -16,7 +11,9 @@ public class InputView {
     public int inputDateToReserve(){ //예약 날자 입력
         System.out.println(SERVICE_INPUT_DAYS.getMessage());
         try{
-            return stringToInt(Console.readLine());
+            int inputValue = stringToInt(Console.readLine());
+
+            return inputValue;
         } catch(IllegalArgumentException e){
             System.out.println(e.getMessage());
             return inputDateToReserve();
@@ -27,12 +24,10 @@ public class InputView {
         System.out.println(SERVICE_INPUT_MENUS.getMessage());
         try{
             String userInput = Console.readLine();
-
             return userInput;
         } catch (IllegalArgumentException e){
             System.out.println(e.getMessage());
             return inputOrderMenu();
         }
-
     }
 }
