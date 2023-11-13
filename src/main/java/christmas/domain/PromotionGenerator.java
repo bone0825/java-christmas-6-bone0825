@@ -21,7 +21,6 @@ public class PromotionGenerator {
         this.reservationDay = reservationDay;
         this.orders= orders; //주문 내역 생성
         setTotalPrice(orders);
-        System.out.println(totalPrice);
     }
 
     private void setTotalPrice(Map<Map<Menu, Integer>, Integer> orders) {
@@ -30,7 +29,6 @@ public class PromotionGenerator {
                  totalPrice += menu.getPrices(number)*counts;
             });
         });
-
     }
 
 
