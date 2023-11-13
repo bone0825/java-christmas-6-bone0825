@@ -1,14 +1,21 @@
 package christmas.domain;
 
 public enum EvenetBadge {
-    STARBADGE("별"),
-    TREEBADGE("트리"),
-    SANTABADGE("산타");
+    SANTABADGE("산타",20000),
+    TREEBADGE("트리",10000),
+    STARBADGE("별",5000);
 
     private String badge;
-    private EvenetBadge(String badge) {
+    private int minimumBenefit;
+    private EvenetBadge(String badge, int minimumBenefit) {
         this.badge=badge;
+        this.minimumBenefit = minimumBenefit;
     }
 
-    public String getBadge(){return badge;}
+    public String getBadge(){
+        return badge;
+    }
+    public int getMinimumBenefit() {
+        return minimumBenefit;
+    }
 }

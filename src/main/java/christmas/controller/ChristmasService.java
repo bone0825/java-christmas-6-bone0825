@@ -6,19 +6,33 @@ import christmas.view.InputView;
 import christmas.view.OutputView;
 
 public class ChristmasService {
-    InputView inputView;
-    OutputView outputView;
+    private InputView inputView;
+    private OutputView outputView;
+    private int reservationDay;
+
 
     public ChristmasService(){
         this.inputView = new InputView();
         this.outputView = new OutputView();
+        System.out.println(outputView.outputhelloMessage());
+        reservationDay = inputView.inputDateToReserve();
     }
 
     public void run() {
-        System.out.println(outputView.helloMessage());
-        int reservationDay = inputView.inputDateToReserve();
         OrderGenerator orderGenerator = new OrderGenerator(inputView,outputView);
-        PromotionGenerator promotions = new PromotionGenerator(inputView,reservationDay,orderGenerator.getOrderedMenus());
+        PromotionGenerator promotions = new PromotionGenerator(inputView,outputView,reservationDay,orderGenerator.getOrderedMenus());
+        showOrderedResult(promotions);
+    }
+
+    private void showOrderedResult(PromotionGenerator promotions) {
+        System.out.println(outputView.showPromotionPreview(reservationDay));;
+        promotions.showOrderedMenu();
+        promotions.showTotalPrice();
+        promotions.showGiveawayMenu();
+        promotions.showBenefits();
+        promotions.showTotalBenefits();
+        promotions.showExpectedPayment();
+        promotions.showEventBadge();
     }
 
 

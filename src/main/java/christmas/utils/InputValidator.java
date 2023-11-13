@@ -1,6 +1,6 @@
 package christmas.utils;
 
-import christmas.exception.inputvalidator.OutOfDayException;
+import christmas.exception.inputvalidator.ILLEGALDAYeXCEPTION;
 import christmas.exception.menuvalidator.IllegalOrderException;
 import christmas.exception.inputvalidator.NonNumericInputException;
 import christmas.exception.inputvalidator.ContainSpaceException;
@@ -20,7 +20,7 @@ public class InputValidator {
     }
 
     public static void validateDayRange(int inputValue){
-        if (inputValue > 31 || inputValue <= 0 ) throw new OutOfDayException();
+        if (inputValue > 31 || inputValue <= 0 ) throw new ILLEGALDAYeXCEPTION();
     }
 
 

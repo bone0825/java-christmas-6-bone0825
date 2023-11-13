@@ -21,7 +21,7 @@ public class OrderGenerator {
     }
     private void showAllMenus() {
         System.out.println();
-        System.out.println(outputView.showOrderableMenus());
+        System.out.println(outputView.outputOrderableMenus());
         System.out.println();
         for(Menu menu : Menu.values()){
             System.out.println(menu.getType() + " : " + String.join(",",menu.getAllMenus()));
