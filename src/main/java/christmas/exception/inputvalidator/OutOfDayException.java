@@ -2,11 +2,11 @@ package christmas.exception.inputvalidator;
 
 import christmas.exception.CustomException;
 
-import static christmas.exception.ErrorMessage.ILLEGALDAYeXCEPTION;
+import static christmas.exception.ErrorMessage.ILLEGALDAYEXCEPTION;
 
-public class ILLEGALDAYeXCEPTION extends CustomException {
-    public ILLEGALDAYeXCEPTION(){super(ILLEGALDAYeXCEPTION.getMessage());}
+public class OutOfDayException extends CustomException {
+    public OutOfDayException(){super(ILLEGALDAYEXCEPTION.getMessage());}
 
     @Override
-    public String getMessage() {return ILLEGALDAYeXCEPTION.getMessage(); }
+    public String getMessage() {return ILLEGALDAYEXCEPTION.getMessage(); }
 }

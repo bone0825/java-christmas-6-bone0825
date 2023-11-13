@@ -37,9 +37,4 @@ public class MenuValidator {
         return menu.getType().equals("Drinks");
     }
 
-    public static void validateEmptyMenu(List<String> tempMenu) {//입력한 메뉴 공백 확인
-        for(String menu: tempMenu){
-            if (menu.isEmpty() || menu.equals(" ")) throw new EmptyOrderException();
-        }
-    }
 }

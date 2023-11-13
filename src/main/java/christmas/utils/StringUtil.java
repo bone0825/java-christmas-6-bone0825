@@ -1,5 +1,8 @@
 package christmas.utils;
 
+import christmas.exception.inputvalidator.OutOfDayException;
+import christmas.exception.menuvalidator.EmptyOrderException;
+import christmas.exception.menuvalidator.IllegalOrderException;
 import christmas.exception.menuvalidator.NoMenuException;
 import christmas.menu.Menu;
 
@@ -7,39 +10,52 @@ import java.util.*;
 
 public class StringUtil {
 
-    public static int stringToInt(String inputValue) {
-        InputValidator.validateContainSpace(inputValue); // 공백 검사
-        InputValidator.validateAmountNotNumber(inputValue); //숫자 검사
+    public static int stringToDay(String inputValue) {
+        try{
+            InputValidator.validateContainSpace(inputValue); // 공백 검사
+            InputValidator.validateAmountNotNumber(inputValue); //숫자 검사
+        } catch (IllegalArgumentException e){
+            throw new OutOfDayException();
+        }
         return Integer.parseInt(inputValue);
     }
 
     public static Map<Map<Menu,Integer>, Integer> stringToMap(String inputValue) {
-        List<String> tempMenu = stringToList(inputValue);
-        MenuValidator.validateEmptyMenu(tempMenu);
-        return listToMap(tempMenu);
+            List<String> tempMenu = stringToList(inputValue);
+            return listToMap(tempMenu);
     }
 
     private static List<String> stringToList(String inputValue) {
-        InputValidator.validateContainSpace(inputValue); //공백 검사
-        InputValidator.validateDashSeparate(inputValue); //"-" 존재 검사
-        return Arrays.asList(inputValue.split(",",-1));
+        try{
+            InputValidator.validateContainSpace(inputValue); //공백 검사
+            InputValidator.validateDashSeparate(inputValue); //"-" 존재 검사
+        } catch(IllegalArgumentException e){
+            throw new EmptyOrderException();
+        } finally{
+            return Arrays.asList(inputValue.split(",",-1));
+        }
     }
 
 
     private static Map<Map<Menu,Integer>, Integer> listToMap(List<String> menus) {
         Map<Map<Menu, Integer>, Integer> tempMenuAndCount = new HashMap<>();
         int checkTotalCount = 0;
-        for (String menu : menus) {
-            String[] temp = menu.split("-");
-            MenuValidator.validateMenuFormatSize(temp);
-            InputValidator.validateAmountNotNumber(temp[1]);
-            tempMenuAndCount.put(getMenuItem(temp[0]), Integer.parseInt(temp[1]));
-            checkTotalCount += Integer.parseInt(temp[1]);
+        try{
+            for (String menu : menus) {
+                String[] temp = menu.split("-");
+                MenuValidator.validateMenuFormatSize(temp);
+                InputValidator.validateAmountNotNumber(temp[1]);
+                tempMenuAndCount.put(getMenuItem(temp[0]), Integer.parseInt(temp[1]));
+                checkTotalCount += Integer.parseInt(temp[1]);
+            }
+        } catch (IllegalArgumentException e){
+            throw new IllegalOrderException();
         }
         MenuValidator.validtateCountRange(checkTotalCount);
-
         return tempMenuAndCount;
     }
+
+
 
     private static Map<Menu,Integer> getMenuItem(String s) {
         return containMenuItem(s, Menu.values());
