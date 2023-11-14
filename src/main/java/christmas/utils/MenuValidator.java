@@ -6,8 +6,7 @@ import christmas.exception.menuvalidator.MenuCountOutOfRangeException;
 import christmas.exception.menuvalidator.OnlyDrinksException;
 import christmas.menu.Menu;
 
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class MenuValidator {
 
@@ -47,9 +46,13 @@ public class MenuValidator {
         if(values <= 0 ) throw new MenuCountZeroException();
     }
 
-    public static void validateOrderOverlapping(List<String> tempMenu) {
-        if(tempMenu.size() != tempMenu.stream().distinct().count()) {
-            throw new IllegalOrderException();
+
+    public static void validateOrderOverlapping(List<String> inputMenus) {
+        Set<String> menu = new HashSet<>();
+        for(String menus : inputMenus){
+            menu.add(menus.split("-")[0]);
         }
+        if (inputMenus.size()!=menu.size()) throw new IllegalOrderException();
+
     }
 }

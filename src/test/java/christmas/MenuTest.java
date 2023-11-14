@@ -48,7 +48,7 @@ public class MenuTest extends NsTest {
     @Test
     void 산타배지_증정_메뉴_출력() {
         assertSimpleTest(() -> {
-            run("25", "티본스테이크-3,제로콜라-1");
+            run("3", "티본스테이크-3,제로콜라-1");
             assertThat(output()).contains("샴페인 1개","산타");
         });
     } //pass
