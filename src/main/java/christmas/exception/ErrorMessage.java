@@ -8,6 +8,7 @@ public enum ErrorMessage {
     NONSPACEINPUT("[ERROR] 공백 없이 입력해 주세요"),
     ILLEGALORDERINPUT("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요."),
     MENUNOTEXIST("[ERROR] 존재하지 않는 메뉴입니다. 주문 양식을 준수해 주세요"),
+    MENUCOUNTZEROEXCEPTION("[ERROR] 메뉴의 개수는 0 이하일 수 없습니다."),
     MENUCOUNTOUTOFRANGE("[ERROR] 주문 메뉴 개수는 20개를 넘길 수 없습니다. 다시 입력해 주세요")
     ;
 

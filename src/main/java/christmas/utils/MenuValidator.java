@@ -1,18 +1,17 @@
 package christmas.utils;
 
-import christmas.exception.menuvalidator.EmptyOrderException;
+import christmas.exception.menuvalidator.MenuCountZeroException;
 import christmas.exception.menuvalidator.IllegalOrderException;
 import christmas.exception.menuvalidator.MenuCountOutOfRangeException;
 import christmas.exception.menuvalidator.OnlyDrinksException;
 import christmas.menu.Menu;
-
-import java.util.List;
 import java.util.Map;
 
 public class MenuValidator {
 
     public static void validtateCountRange(int inputValue){ // 총 메뉴 입력 개수
-        if(inputValue > 20 || inputValue <=0 ) throw new MenuCountOutOfRangeException();
+        if(inputValue > 20) throw new MenuCountOutOfRangeException();
+        if(inputValue <= 0 ) throw new MenuCountZeroException();
     }
 
     public static void validateMenuFormatSize(String[] inputValues){
