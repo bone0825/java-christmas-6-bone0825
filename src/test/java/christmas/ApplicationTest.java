@@ -95,6 +95,28 @@ class ApplicationTest extends NsTest {
         });
     } //pass
     @Test
+    void 증정_메뉴_출력() {
+        assertSimpleTest(() -> {
+            run("25", "티본스테이크-3,제로콜라-1");
+            assertThat(output()).contains("샴페인 1개");
+        });
+    } //pass
+    @Test
+    void 총혜택_금액_출력() {
+        assertSimpleTest(() -> {
+            run("3", "티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1");
+            assertThat(output()).contains("<총혜택 금액>"+LINE_SEPARATOR+"-31,246원");
+        });
+    } //pass
+    @Test
+    void 할인_후_예상_결제_금액_출력() {
+        assertSimpleTest(() -> {
+            run("3", "티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1");
+            assertThat(output()).contains("<할인 후 예상 결제 금액>" + LINE_SEPARATOR + "135,754원");
+        });
+    } //pass
+
+    @Test
     void 날짜_예외_테스트() {
         assertSimpleTest(() -> {
             runException("a");
@@ -108,6 +130,7 @@ class ApplicationTest extends NsTest {
             assertThat(output()).contains("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
         });
     } //pass
+    
 
     @Override
     protected void runMain() {
