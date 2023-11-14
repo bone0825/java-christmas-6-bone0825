@@ -2,7 +2,6 @@ package christmas.utils;
 
 import christmas.exception.inputvalidator.OutOfDayException;
 import christmas.exception.menuvalidator.EmptyOrderException;
-import christmas.exception.menuvalidator.IllegalOrderException;
 import christmas.exception.menuvalidator.NoMenuException;
 import christmas.menu.Menu;
 

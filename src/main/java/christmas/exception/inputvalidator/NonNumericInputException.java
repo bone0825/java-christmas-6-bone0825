@@ -1,6 +1,7 @@
 package christmas.exception.inputvalidator;
 
 import christmas.exception.CustomException;
+
 import static christmas.exception.ErrorMessage.NONNUMERICINPUT;
 
 public class NonNumericInputException extends CustomException {
