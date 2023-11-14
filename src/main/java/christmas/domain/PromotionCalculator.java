@@ -12,18 +12,6 @@ import java.util.Map;
 
 public class PromotionCalculator {
 
-    private static final int YEAR = 2023; //삼페인 증정 금액
-    private static final int DAYDISCOUNT = 2023; //주중, 주말 할인 금액
-    private static final int MONTH = 12; //삼페인 증정 금액
-
-    private static final int GIVEAWAYEVENTCHAMPAGNE = 120000; //삼페인 증정 금액
-
-    private static final int CHRISTAMSDDAYDISCOUNTENDDAY = 25; // 크리스마스 디데이 할인 끝나는 날
-    private static final int CHRISTAMSDDAYDISCOUNTPRICEDISCOUNT = 1000; // 크리스마스 디데이 할인 기본 금액
-    private static final int CHRISTAMSDDAYDISCOUNTPRICEPERDAYDISCOUNT = 100; //크리스마스 디데이 할인 날짜별 추가금액
-
-
-
     private int reservationDay;
     private LocalDate visitDate;
     private int totalPrice;
@@ -41,7 +29,7 @@ public class PromotionCalculator {
 
     public PromotionCalculator(int reservationDay, int totalPrice, Map<Map<Menu, Integer>, Integer> orders){
         benefitDetails = new HashMap<>();
-        this.visitDate = LocalDate.of(YEAR,MONTH,reservationDay);
+        this.visitDate = LocalDate.of(EventDate.YEAR.getDate(),EventDate.MONTH.getDate(),reservationDay);
         DayOfWeek dayOfWeek = visitDate.getDayOfWeek();
         this.reservationDay=reservationDay;
         this.totalPrice = totalPrice;
@@ -90,7 +78,7 @@ public class PromotionCalculator {
     }
 
     private GiveawayMenu checkGivewawyMenu() {
-        if (totalPrice > GIVEAWAYEVENTCHAMPAGNE) return GiveawayMenu.Champagne;
+        if (totalPrice > GiveawayMenu.Champagne.getGivewawyMenuPrice()) return GiveawayMenu.Champagne;
         return null;
     }
 
@@ -100,7 +88,7 @@ public class PromotionCalculator {
     }
 
     private int weekendDiscount(Map<Map<Menu, Integer>, Integer> orders) {
-        if (checkWeekend) return checkMainMenuCount(orders) * DAYDISCOUNT;
+        if (checkWeekend) return checkMainMenuCount(orders) * DiscountAmount.DAY_WEEKEND_DISCOUNT.getDiscounts();
 
         return 0;
     }
@@ -119,7 +107,7 @@ public class PromotionCalculator {
         return 0;
     }
     private int weekdayDiscount(Map<Map<Menu, Integer>, Integer> orders) {
-        if (!checkWeekend) return checkDessertCount(orders) * DAYDISCOUNT;
+        if (!checkWeekend) return checkDessertCount(orders) * DiscountAmount.DAY_WEEKEND_DISCOUNT.getDiscounts();
         return 0;
     }
 
@@ -138,7 +126,7 @@ public class PromotionCalculator {
     }
 
     private int christmasDDayDiscount() {
-        if (reservationDay < CHRISTAMSDDAYDISCOUNTENDDAY) return CHRISTAMSDDAYDISCOUNTPRICEDISCOUNT+(reservationDay-1)*CHRISTAMSDDAYDISCOUNTPRICEPERDAYDISCOUNT;
+        if (reservationDay < EventDate.DDAY.getDate()) return DiscountAmount.D_DAY_DISCOUNT.getDiscounts()+(reservationDay-1)*DiscountAmount.D_DAY_DISCOUNT_PERDAY.getDiscounts();
         return 0;
     }
 
