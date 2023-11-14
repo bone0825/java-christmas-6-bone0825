@@ -11,7 +11,6 @@ public class MenuValidator {
 
     public static void validtateCountRange(int inputValue){ // 총 메뉴 입력 개수
         if(inputValue > 20) throw new MenuCountOutOfRangeException();
-        if(inputValue <= 0 ) throw new MenuCountZeroException();
     }
 
     public static void validateMenuFormatSize(String[] inputValues){
@@ -36,4 +35,13 @@ public class MenuValidator {
         return menu.getType().equals("Drinks");
     }
 
+    public static void validateMenuCount(String inputValue) {
+        try{
+            InputValidator.validateAmountNotNumber(inputValue);
+        } catch (IllegalArgumentException e){
+            throw new IllegalOrderException();
+        }
+        int values = Integer.parseInt(inputValue);
+        if(values <= 0 ) throw new MenuCountZeroException();
+    }
 }

@@ -40,17 +40,15 @@ public class StringUtil {
     private static Map<Map<Menu,Integer>, Integer> listToMap(List<String> menus) {
         Map<Map<Menu, Integer>, Integer> tempMenuAndCount = new HashMap<>();
         int checkTotalCount = 0;
-        try{
-            for (String menu : menus) {
-                String[] temp = menu.split("-");
-                MenuValidator.validateMenuFormatSize(temp);
-                InputValidator.validateAmountNotNumber(temp[1]);
-                tempMenuAndCount.put(getMenuItem(temp[0]), Integer.parseInt(temp[1]));
-                checkTotalCount += Integer.parseInt(temp[1]);
-            }
-        } catch (IllegalArgumentException e){
-            throw new IllegalOrderException();
+
+        for (String menu : menus) {
+            String[] temp = menu.split("-");
+            MenuValidator.validateMenuFormatSize(temp);
+            MenuValidator.validateMenuCount(temp[1]);
+            tempMenuAndCount.put(getMenuItem(temp[0]), Integer.parseInt(temp[1]));
+            checkTotalCount += Integer.parseInt(temp[1]);
         }
+
         MenuValidator.validtateCountRange(checkTotalCount);
         return tempMenuAndCount;
     }
