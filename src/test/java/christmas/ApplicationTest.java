@@ -130,7 +130,21 @@ class ApplicationTest extends NsTest {
             assertThat(output()).contains("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
         });
     } //pass
-    
+    @Test
+    void 음료만_주문_예외_테스트(){
+        assertSimpleTest(() -> {
+            runException("3", "제로콜라-1");
+            assertThat(output()).contains("[ERROR] 음료만 주문할 수 없습니다.");
+        });
+    } //pass
+    @Test
+    void 주문_개수_예외_테스트(){
+        assertSimpleTest(() -> {
+            runException("3", "제로콜라-10,타파스-11");
+            assertThat(output()).contains("[ERROR] 주문 메뉴 개수는 20개를 넘길 수 없습니다. 다시 입력해 주세요");
+        });
+    } //pass
+
 
     @Override
     protected void runMain() {
