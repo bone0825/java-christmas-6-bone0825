@@ -36,7 +36,6 @@ public class OrderGenerator {
             MenuValidator.validateMenuOnlyDrinks(orders);
             return orders;
         } catch (IllegalArgumentException e){
-            e.printStackTrace();
             System.out.println(e.getMessage());
             return makeOrders();
         }

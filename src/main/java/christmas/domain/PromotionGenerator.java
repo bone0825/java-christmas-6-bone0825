@@ -1,7 +1,6 @@
 package christmas.domain;
 
 import christmas.menu.Menu;
-import christmas.utils.StringUtil;
 import christmas.view.InputView;
 import christmas.view.OutputView;
 
