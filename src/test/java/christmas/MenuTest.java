@@ -10,17 +10,13 @@ public class MenuTest extends NsTest {
     private static final String LINE_SEPARATOR = System.lineSeparator();
 
     @Test
-    void 증정_메뉴_없음_출력() {
+    void 이벤트_혜택_없음_출력() {
         assertSimpleTest(() -> {
             run("26", "타파스-1,제로콜라-1");
-            assertThat(output()).contains("<증정 메뉴>" + LINE_SEPARATOR + "없음");
-        });
-    } //pass
-    @Test
-    void 이벤트_배지_없음_출력() {
-        assertSimpleTest(() -> {
-            run("26", "타파스-1,제로콜라-1");
-            assertThat(output()).contains("<12월 이벤트 배지>" + LINE_SEPARATOR + "없음");
+            assertThat(output()).contains("<증정 메뉴>" + LINE_SEPARATOR + "없음",
+                    "<혜택 내역>" + LINE_SEPARATOR + "없음",
+                    "<총혜택 금액>" + LINE_SEPARATOR + "0원",
+                    "<12월 이벤트 배지>" + LINE_SEPARATOR + "없음");
         });
     } //pass
     @Test
