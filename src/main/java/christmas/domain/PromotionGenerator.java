@@ -71,13 +71,13 @@ public class PromotionGenerator {
     public void showTotalBenefits() {
         System.out.println();
         System.out.println(outputView.outputTotalBenefits());
-        promotionCalculator.showTotalBenefit();
+        System.out.println(promotionCalculator.showTotalBenefit());
     }
 
     public void showExpectedPayment() {
         System.out.println();
         System.out.println(outputView.outputExpectedPrice());
-        promotionCalculator.showExpectedPrice();
+        System.out.println(promotionCalculator.showExpectedPrice());
     }
 
     public void showEventBadge() {

@@ -151,16 +151,16 @@ public class PromotionCalculator {
         return benefitDetials;
     }
 
-    public void showTotalBenefit() {
+    public String showTotalBenefit() {
         if (totalBenefits!= 0) {
-            System.out.println("-"+ OutputView.outputPriceFormat(totalBenefits)+"원");
-            return;
+            return ("-"+ OutputView.outputPriceFormat(totalBenefits)+"원");
+
         }
-        System.out.println(totalBenefits+"원");
+        return (totalBenefits+"원");
     }
 
-    public void showExpectedPrice() {
-        System.out.println(OutputView.outputPriceFormat(totalPrice - totalBenefits + giveawayMenuDiscount) + "원");
+    public String showExpectedPrice() {
+        return (OutputView.outputPriceFormat(totalPrice - totalBenefits + giveawayMenuDiscount) + "원");
     }
 
     public String showGiveawayBadge() {
