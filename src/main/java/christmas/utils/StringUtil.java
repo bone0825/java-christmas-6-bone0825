@@ -20,8 +20,9 @@ public class StringUtil {
     }
 
     public static Map<Map<Menu,Integer>, Integer> stringToMap(String inputValue) {
-            List<String> tempMenu = stringToList(inputValue);
-            return listToMap(tempMenu);
+        List<String> tempMenu = stringToList(inputValue);
+        MenuValidator.validateOrderOverlapping(tempMenu);
+        return listToMap(tempMenu);
     }
 
     private static List<String> stringToList(String inputValue) {
@@ -38,8 +39,13 @@ public class StringUtil {
 
     private static Map<Map<Menu,Integer>, Integer> listToMap(List<String> menus) {
         Map<Map<Menu, Integer>, Integer> tempMenuAndCount = new HashMap<>();
-        int checkTotalCount = 0;
+        makeMap(tempMenuAndCount,menus);
 
+        return tempMenuAndCount;
+    }
+
+    private static void makeMap(Map<Map<Menu, Integer>, Integer> tempMenuAndCount, List<String> menus) {
+        int checkTotalCount = 0;
         for (String menu : menus) {
             String[] temp = menu.split("-");
             MenuValidator.validateMenuFormatSize(temp);
@@ -47,11 +53,8 @@ public class StringUtil {
             tempMenuAndCount.put(getMenuItem(temp[0]), Integer.parseInt(temp[1]));
             checkTotalCount += Integer.parseInt(temp[1]);
         }
-
         MenuValidator.validtateCountRange(checkTotalCount);
-        return tempMenuAndCount;
     }
-
 
 
     private static Map<Menu,Integer> getMenuItem(String s) {

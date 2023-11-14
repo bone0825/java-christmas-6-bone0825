@@ -78,7 +78,7 @@ public class PromotionCalculator {
     }
 
     private GiveawayMenu checkGivewawyMenu() {
-        if (totalPrice > GiveawayMenu.Champagne.getGivewawyMenuPrice()) return GiveawayMenu.Champagne;
+        if (totalPrice > GiveawayMenu.Champagne.getNeededAmount()) return GiveawayMenu.Champagne;
         return null;
     }
 
@@ -126,7 +126,7 @@ public class PromotionCalculator {
     }
 
     private int christmasDDayDiscount() {
-        if (reservationDay < EventDate.DDAY.getDate()) return DiscountAmount.D_DAY_DISCOUNT.getDiscounts()+(reservationDay-1)*DiscountAmount.D_DAY_DISCOUNT_PERDAY.getDiscounts();
+        if (reservationDay <= EventDate.DDAY.getDate()) return DiscountAmount.D_DAY_DISCOUNT.getDiscounts()+(reservationDay-1)*DiscountAmount.D_DAY_DISCOUNT_PERDAY.getDiscounts();
         return 0;
     }
 
