@@ -152,7 +152,11 @@ public class PromotionCalculator {
     }
 
     public void showTotalBenefit() {
-        System.out.println("-"+ OutputView.outputPriceFormat(totalBenefits)+"원");
+        if (totalBenefits!= 0) {
+            System.out.println("-"+ OutputView.outputPriceFormat(totalBenefits)+"원");
+            return;
+        }
+        System.out.println(totalBenefits+"원");
     }
 
     public void showExpectedPrice() {
