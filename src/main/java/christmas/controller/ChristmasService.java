@@ -10,6 +10,8 @@ public class ChristmasService {
     private OutputView outputView;
     private int reservationDay;
 
+    PromotionGenerator promotionGenerator;
+
 
     public ChristmasService(){
         this.inputView = new InputView();
@@ -20,19 +22,62 @@ public class ChristmasService {
 
     public void run() {
         OrderGenerator orderGenerator = new OrderGenerator(inputView,outputView);
-        PromotionGenerator promotions = new PromotionGenerator(inputView,outputView,reservationDay,orderGenerator.getOrderedMenus());
-        showOrderedResult(promotions);
+        promotionGenerator = new PromotionGenerator(reservationDay,orderGenerator.getOrderedMenus());
+        showOrderedResult(promotionGenerator);
     }
 
     private void showOrderedResult(PromotionGenerator promotions) {
         System.out.println(outputView.showPromotionPreview(reservationDay));;
-        promotions.showOrderedMenu();
-        promotions.showTotalPrice();
-        promotions.showGiveawayMenu();
-        promotions.showBenefits();
-        promotions.showTotalBenefits();
-        promotions.showExpectedPayment();
-        promotions.showEventBadge();
+        showOrderedMenu();
+        showTotalPrice();
+        showGiveawayMenu();
+        showBenefits();
+        showTotalBenefits();
+        showExpectedPayment();
+        showEventBadge();
+    }
+
+    private void showEventBadge() {
+        System.out.println();
+        System.out.println(outputView.outputGiveawayBadge());
+        System.out.println(promotionGenerator.getEventBadge());
+    }
+
+    private void showExpectedPayment() {
+        System.out.println();
+        System.out.println(outputView.outputExpectedPrice());
+        System.out.println(promotionGenerator.getExpectedPayment());
+    }
+
+    private void showTotalBenefits() {
+        System.out.println();
+        System.out.println(outputView.outputTotalBenefits());
+        System.out.println(promotionGenerator.getTotalBenefits());
+    }
+
+    private void showBenefits() {
+        System.out.println();
+        System.out.println(outputView.outputBenefitDetails());
+        System.out.println(promotionGenerator.getBenefits());
+    }
+
+    private void showGiveawayMenu() {
+        System.out.println();
+        System.out.println(outputView.outputGiveawayMenus());
+        System.out.println(promotionGenerator.getGiveawayMenu());
+
+    }
+
+    private void showTotalPrice() {
+        System.out.println();
+        System.out.println(outputView.outputTotalPrices());
+        System.out.println(OutputView.outputPriceFormat(promotionGenerator.getTotalPrice())+"원");
+    }
+
+    private void showOrderedMenu() {
+        System.out.println();
+        System.out.println(outputView.outputOrderedMenu());
+        System.out.println(promotionGenerator.getOrderedMenu());
     }
 
 

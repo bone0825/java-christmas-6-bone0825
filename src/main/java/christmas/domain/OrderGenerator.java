@@ -17,7 +17,7 @@ public class OrderGenerator {
         this.outputView = outputView;
         this.inputView = inputView;
         showAllMenus();
-        this.orders= makeOrders(); //주문 내역 생성
+        this.orders= makeOrders(inputView.inputOrderMenu()); //주문 내역 생성
     }
     private void showAllMenus() {
         System.out.println();
@@ -28,16 +28,15 @@ public class OrderGenerator {
         }
     }
 
-    private Map<Map<Menu,Integer>, Integer> makeOrders() {
+    private Map<Map<Menu,Integer>, Integer> makeOrders(String menuInput) {
         Map<Map<Menu,Integer>, Integer> orders;
-        String menuInput = inputView.inputOrderMenu();
         try{
             orders = stringToMap(menuInput);
             MenuValidator.validateMenuOnlyDrinks(orders);
             return orders;
         } catch (IllegalArgumentException e){
             System.out.println(e.getMessage());
-            return makeOrders();
+            return makeOrders(inputView.inputOrderMenu());
         }
     }
 

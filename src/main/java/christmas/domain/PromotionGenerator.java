@@ -13,13 +13,10 @@ public class PromotionGenerator {
     private Map<Map<Menu,Integer>,Integer> orders; //<<카테고리,주문번호>,주문개수>
     private int totalPrice; //할인 전 총 금액
 
-    InputView inputView;
-    OutputView outputView;
     PromotionCalculator promotionCalculator;
 
-    public PromotionGenerator(InputView inputView, OutputView outputView, int reservationDay,Map<Map<Menu,Integer>,Integer> orders){
-        this.inputView = inputView;
-        this.outputView = outputView;
+    public PromotionGenerator(int reservationDay,Map<Map<Menu,Integer>,Integer> orders){
+
         this.reservationDay = reservationDay;
         this.orders= orders; //주문 내역 생성
         setTotalPrice(orders);
@@ -34,55 +31,42 @@ public class PromotionGenerator {
         });
     }
 
-    public void showOrderedMenu() {
-        System.out.println();
-        System.out.println(outputView.outputOrderedMenu());
+    public String getOrderedMenu() {
+        StringBuilder orderMenus = new StringBuilder();
         orders.forEach((menus,counts)->{
             menus.forEach((menu,number)->{
-                System.out.println(menu.getMenus(number)+ " " + counts+"개");
+                orderMenus.append(menu.getMenus(number)).append(" ").append (counts).append("개\n");
             });
         });
+        return orderMenus.toString();
     }
 
-    public void showTotalPrice() {
-        System.out.println();
-        System.out.println(outputView.outputTotalPrices());
-        System.out.println(OutputView.outputPriceFormat(totalPrice)+"원");
+    public int getTotalPrice() {
+        return totalPrice;
     }
 
-    public void showGiveawayMenu() {
-        System.out.println();
-        System.out.println(outputView.outputGiveawayMenus());
-        System.out.println(promotionCalculator.showGiveawayMenu());
+    public String getGiveawayMenu() {
+        return promotionCalculator.showGiveawayMenu();
     }
 
-    public void showBenefits() {
-        System.out.println();
-        System.out.println(outputView.outputBenefitDetails());
+    public String getBenefits() {
         List<String> details =  promotionCalculator.showBenefitDetails();
-        if (details.isEmpty())  {System.out.println(OutputView.outputNothing());}
-        if (!details.isEmpty()){
-            for(String detail :details){
-                System.out.println(detail);
-            }
-        }
+        StringBuilder benefits = new StringBuilder();
+        if (details.isEmpty())  {return OutputView.outputNothing();}
+        for(String detail :details){benefits.append(detail).append("\n");}
+
+        return benefits.toString();
     }
 
-    public void showTotalBenefits() {
-        System.out.println();
-        System.out.println(outputView.outputTotalBenefits());
-        System.out.println(promotionCalculator.showTotalBenefit());
+    public String getTotalBenefits() {
+        return promotionCalculator.showTotalBenefit();
     }
 
-    public void showExpectedPayment() {
-        System.out.println();
-        System.out.println(outputView.outputExpectedPrice());
-        System.out.println(promotionCalculator.showExpectedPrice());
+    public String getExpectedPayment() {
+        return promotionCalculator.showExpectedPrice();
     }
 
-    public void showEventBadge() {
-        System.out.println();
-        System.out.println(outputView.outputGiveawayBadge());
-        System.out.println(promotionCalculator.showGiveawayBadge());
+    public String getEventBadge() {
+        return promotionCalculator.showGiveawayBadge();
     }
 }
