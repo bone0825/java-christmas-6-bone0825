@@ -45,7 +45,7 @@ public class MenuTest extends NsTest {
 
     void printEvents(String output){
 //        OrderGenerator orderGenerator = new OrderGenerator();
-        menu.put(Menu.DESSERT,1);g
+        menu.put(Menu.DESSERT,1);
         menu.put(Menu.DRINKS,1);
 
         assertSimpleTest(() -> {
