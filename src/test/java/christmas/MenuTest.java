@@ -1,10 +1,8 @@
 package christmas;
 
 import camp.nextstep.edu.missionutils.test.NsTest;
-import christmas.domain.OrderGenerator;
-import christmas.domain.PromotionGenerator;
+import christmas.domain.PromotionCalculator;
 import christmas.menu.Menu;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
@@ -15,42 +13,62 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class MenuTest extends NsTest {
     private static final String LINE_SEPARATOR = System.lineSeparator();
-    Map<Menu, Integer> menu = new HashMap<>();
-    Map<Map<Menu,Integer>, Integer> menus = new HashMap<>();
+    PromotionCalculator promotionCalculator;
 
     @Test
     void 특별_할인_적용(){
+        setEvent();
         printEvents("특별 할인: -1,000원");
     }//pass
     @Test
     void 디데이_할인_적용(){
+        setEvent();
         printEvents("크리스마스 디데이 할인: -3,400원");
     }//pass
     @Test
     void 평일_할인_적용(){
+        setEvent();
         printEvents("평일 할인: -4,046원");
     }//pass
     @Test
     void 총혜택_적용(){
-        printEvents("<총혜택 금액>" + LINE_SEPARATOR + "-8,446원");
+        setEvent();
+        assertSimpleTest(() -> {
+            assertThat(promotionCalculator.showTotalBenefit()).contains("-8,446원");
+        });
     }//pass
     @Test
     void 예상_금액(){
-        printEvents("<할인 후 예상 결제 금액>" + LINE_SEPARATOR + "24,554원");
+        setEvent();
+        assertSimpleTest(() -> {
+            assertThat(promotionCalculator.showExpectedPrice()).contains("24,554원");
+        });
     }//pass
     @Test
     void 별배지_적용(){
-        printEvents("<12월 이벤트 배지>" + LINE_SEPARATOR + "별");
+        setEvent();
+        assertSimpleTest(() -> {
+            assertThat(promotionCalculator.showGiveawayBadge()).contains("별");
+        });
     }//pass
 
-    void printEvents(String output){
-//        OrderGenerator orderGenerator = new OrderGenerator();
-        menu.put(Menu.DESSERT,1);
-        menu.put(Menu.DRINKS,1);
+    void setEvent(){
+        Map<Map<Menu, Integer>, Integer> menus = new HashMap<>();
 
+        // DESSERT에 대한 값을 갖는 menu Map을 생성하고 이를 menus Map에 추가합니다.
+        Map<Menu, Integer> dessertMap = new HashMap<>();
+        dessertMap.put(Menu.DESSERT, 1);
+        menus.put(dessertMap, 2);
+
+        // DRINKS에 대한 값을 갖는 menu Map을 생성하고 이를 menus Map에 추가합니다.
+        Map<Menu, Integer> drinksMap = new HashMap<>();
+        drinksMap.put(Menu.DRINKS, 1);
+        menus.put(drinksMap, 1);
+        promotionCalculator = new PromotionCalculator(25,33000,menus);
+    }
+    void printEvents(String result){
         assertSimpleTest(() -> {
-            run("25", "초코케이크-2,제로콜라-1");
-            assertThat(output()).contains(output);
+            assertThat(promotionCalculator.showBenefitDetails()).contains(result);
         });
     }
     @Test
