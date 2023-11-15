@@ -17,42 +17,42 @@ public class MenuTest extends NsTest {
 
     @Test
     void 특별_할인_적용(){
-        setEvent();
+        setEventDessertAndDrinks();
         printEvents("특별 할인: -1,000원");
     }//pass
     @Test
     void 디데이_할인_적용(){
-        setEvent();
+        setEventDessertAndDrinks();
         printEvents("크리스마스 디데이 할인: -3,400원");
     }//pass
     @Test
     void 평일_할인_적용(){
-        setEvent();
+        setEventDessertAndDrinks();
         printEvents("평일 할인: -4,046원");
     }//pass
     @Test
     void 총혜택_적용(){
-        setEvent();
+        setEventDessertAndDrinks();
         assertSimpleTest(() -> {
             assertThat(promotionCalculator.showTotalBenefit()).contains("-8,446원");
         });
     }//pass
     @Test
     void 예상_금액(){
-        setEvent();
+        setEventDessertAndDrinks();
         assertSimpleTest(() -> {
             assertThat(promotionCalculator.showExpectedPrice()).contains("24,554원");
         });
     }//pass
     @Test
     void 별배지_적용(){
-        setEvent();
+        setEventDessertAndDrinks();
         assertSimpleTest(() -> {
             assertThat(promotionCalculator.showGiveawayBadge()).contains("별");
         });
     }//pass
 
-    void setEvent(){
+    void setEventDessertAndDrinks(){
         Map<Map<Menu, Integer>, Integer> menus = new HashMap<>();
 
         // DESSERT에 대한 값을 갖는 menu Map을 생성하고 이를 menus Map에 추가합니다.
@@ -72,40 +72,31 @@ public class MenuTest extends NsTest {
         });
     }
     @Test
-    void 이벤트_혜택_없음_출력() {
-        assertSimpleTest(() -> {
-            run("26", "타파스-1,제로콜라-1");
-            assertThat(output()).contains("<증정 메뉴>" + LINE_SEPARATOR + "없음",
-                    "<혜택 내역>" + LINE_SEPARATOR + "없음",
-                    "<총혜택 금액>" + LINE_SEPARATOR + "0원",
-                    "<12월 이벤트 배지>" + LINE_SEPARATOR + "없음");
-        });
-    } //pass
+    void noEventBenefitsOutput() {
+        runAndAssertEventOutput("26", "타파스-1,제로콜라-1", "없음", "없음", "0원", "없음");
+    }
 
     @Test
-    void 주말_할인_적용_출력(){
+    void applyWeekendDiscountOutput() {
+        runAndAssertEventOutput("30", "티본스테이크-1,제로콜라-1", "주말 할인: -2,023");
+    }
 
-//        assertThat(promotionGenerator.getOrderedMenu()).contains(2,023원);
-        assertSimpleTest(() -> {
-            run("30", "티본스테이크-1,제로콜라-1");
-            assertThat(output()).contains("주말 할인: -");
-        });
-    } //pass
     @Test
-    void 이벤트_배지_트리_출력() {
-        assertSimpleTest(() -> {
-            run("25", "아이스크림-5,제로콜라-1");
-            assertThat(output()).contains("<12월 이벤트 배지>" + LINE_SEPARATOR + "트리");
-        });
-    } //pass
-    @Test
-    void 산타배지_증정_메뉴_출력() {
-        assertSimpleTest(() -> {
-            run("3", "티본스테이크-3,제로콜라-1");
-            assertThat(output()).contains("샴페인 1개","산타");
-        });
-    } //pass
+    void showTreeBadgeOutput() {
+        runAndAssertEventOutput("25", "아이스크림-5,제로콜라-1", "<12월 이벤트 배지>" + LINE_SEPARATOR + "트리");
+    }
 
+    @Test
+    void showSantaBadgeAndGiftMenuOutput() {
+        runAndAssertEventOutput("3", "티본스테이크-3,제로콜라-1", "샴페인 1개", "산타");
+    }
+
+    private void runAndAssertEventOutput(String input, String order, String... expectedOutput) {
+        assertSimpleTest(() -> {
+            run(input, order);
+            assertThat(output()).contains(expectedOutput);
+        });
+    }
     @Override
     protected void runMain() {
         Application.main(new String[]{});
