@@ -3,33 +3,32 @@ package christmas.view;
 import camp.nextstep.edu.missionutils.Console;
 import christmas.utils.InputValidator;
 
-import java.util.Map;
-
-import static christmas.utils.StringUtil.stringToInt;
-import static christmas.utils.StringUtil.stringToMap;
+import static christmas.utils.StringUtil.stringToDay;
 
 import static christmas.view.InputMessage.*;
 
 public class InputView {
 
-    public int inputDateToReserve(){
+    public int inputDateToReserve(){ //예약 날자 입력
         System.out.println(SERVICE_INPUT_DAYS.getMessage());
         try{
-            return stringToInt(Console.readLine());
+            int inputValue = stringToDay(Console.readLine());
+            InputValidator.validateDayRange(inputValue);
+            return inputValue;
         } catch(IllegalArgumentException e){
             System.out.println(e.getMessage());
             return inputDateToReserve();
         }
     }
 
-    public Map<String,Integer> inputOrderMenu(){
+    public String inputOrderMenu(){ //주문 메뉴 입력
         System.out.println(SERVICE_INPUT_MENUS.getMessage());
         try{
-            return stringToMap(Console.readLine());
+            String userInput = Console.readLine();
+            return userInput;
         } catch (IllegalArgumentException e){
             System.out.println(e.getMessage());
             return inputOrderMenu();
         }
-
     }
 }

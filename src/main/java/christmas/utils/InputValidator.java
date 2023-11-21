@@ -1,48 +1,31 @@
 package christmas.utils;
 
-import christmas.exception.inputvalidator.IllegalOrderException;
-import christmas.exception.inputvalidator.NoMenuException;
+import christmas.exception.inputvalidator.OutOfDayException;
+import christmas.exception.menuvalidator.IllegalOrderException;
 import christmas.exception.inputvalidator.NonNumericInputException;
 import christmas.exception.inputvalidator.ContainSpaceException;
 
-import christmas.menu.*;
-import com.sun.tools.javac.Main;
-
-
-import java.util.List;
-
-
 public class InputValidator {
-    public static void validateAmountNotNumber(String inputValue) {
-        try {
-            Integer.parseInt(inputValue);
-        } catch (NumberFormatException e) {
-            throw new NonNumericInputException();
-        }
+
+    public static void validateAmountNotNumber(String inputValue) {//숫자 유뮤 확인
+        if (!inputValue.matches("\\d+")) throw new NonNumericInputException();
     }
 
-    public static void validateContainSpace(String inputValue){
-        if(inputValue.contains(" ")) throw new ContainSpaceException();
+    public static void validateContainSpace(String inputValue){ //공백 유뮤 확인
+        if(inputValue.contains(" ") || inputValue.isEmpty()) throw new ContainSpaceException();
     }
 
-
-    public static void validateMenuForm(String order) {
+    public static void validateDashSeparate(String order) { //메뉴 입력 양식 확인
         if (!order.contains("-")) throw new IllegalOrderException();
-        if (!order.contains(",")) throw new IllegalOrderException();
     }
 
-    public static void validateMenuInput(String s) {
-        if(!containsMenuItem(s, MainMenu.values())) throw new NoMenuException();
-        if(!containsMenuItem(s, Appetizer.values())) throw new NoMenuException();
-        if(!containsMenuItem(s, Dessert.values())) throw new NoMenuException();
-        if(!containsMenuItem(s, Drinks.values())) throw new NoMenuException();
-
+    public static void validateDayRange(int inputValue){
+        if (inputValue > 31 || inputValue <= 0 ) throw new OutOfDayException();
     }
 
-    private static boolean containsMenuItem(String input, Menu[] menuItems){
-        for(Menu menuItem : menuItems){
-            if (menuItem.getMenuName().equals(input)){return true;}
-        }
-        return false;
-    }
+
+
+
+
+
 }

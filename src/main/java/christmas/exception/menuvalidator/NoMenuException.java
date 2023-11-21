@@ -1,4 +1,4 @@
-package christmas.exception.inputvalidator;
+package christmas.exception.menuvalidator;
 
 import christmas.exception.CustomException;
 
